@@ -1,0 +1,29 @@
+version: '3'
+
+volumes:
+    db_data: {}
+
+services:
+  lab:
+    image: jupyter/base-notebook
+    volumes:
+     - ./src/:/notebooks
+    ports:
+      - "8888:8888"
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    command: start-notebook.sh --NotebookApp.notebook_dir=/notebooks
+    container_name: zehdner-lab
+  
+  db:
+     image: mysql:5.7
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     container_name: zehdner-db
+     environment:
+       MYSQL_ROOT_PASSWORD: toor
+       MYSQL_DATABASE: db
+       MYSQL_USER: root
+       MYSQL_PASSWORD: toor
+      
