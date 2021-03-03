@@ -1,7 +1,6 @@
 # Zehnder-Source-Automation
 The offical repo of the Zehnder Source Automation project
 
-
 ## How to run
 To run the local version of the development environment just build the docker container and start it
 
