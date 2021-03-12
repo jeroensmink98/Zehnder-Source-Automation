@@ -2,3 +2,5 @@ pandas
 requests
 jupyter-tabnine
 matplotlib
+cbsodata
+openpyxl
