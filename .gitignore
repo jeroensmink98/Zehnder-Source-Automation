@@ -134,3 +134,7 @@ dmypy.json
 
 # Ignore Log Files
 .log
+
+
+# Ignore XLSX files
+.xlsx
