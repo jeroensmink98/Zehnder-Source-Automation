@@ -135,7 +135,8 @@ dmypy.json
 .log
 
 # Remove output values
-/output*
+*/output
 
 # Ignore XLSX files
 *.xlsx
+
