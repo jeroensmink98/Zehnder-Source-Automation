@@ -14,7 +14,8 @@ services:
     # Place specific OS variables here
     environment:
       - JUPYTER_ENABLE_LAB=yes
-
+    env_file:
+      - .env
     # Run this command on container startup: Start notebook service
     command: start-notebook.sh --NotebookApp.notebook_dir=/notebooks
 
