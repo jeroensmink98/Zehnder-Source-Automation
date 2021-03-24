@@ -7,6 +7,8 @@ services:
      - ./src/:/notebooks
     environment:
       - JUPYTER_ENABLE_LAB=yes
+    env_file:
+      - .env
     command: start-notebook.sh --NotebookApp.notebook_dir=/notebooks
     container_name: lab
     ports:
