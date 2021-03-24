@@ -1,8 +1,7 @@
 version: '3'
 services:
   notebook:
-    build:
-      context: ./docker
+    image: zehnder/notebook:1.0
     volumes:
      - ./src/:/notebooks
     environment:
