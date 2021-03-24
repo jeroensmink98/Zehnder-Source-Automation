@@ -3,3 +3,4 @@ requests
 jupyter-tabnine
 cbsodata
 openpyxl
+python-dotenv 
