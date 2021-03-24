@@ -1,0 +1,5 @@
+pandas
+requests
+jupyter-tabnine
+cbsodata
+openpyxl
