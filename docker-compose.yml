@@ -6,7 +6,7 @@ services:
   # Specify notebook service
   notebook:
     # Select image to be used for container
-    image: jeroensmink98/zehnder:1.0
+    image: ${NOTEBOOK_CONTAINER_VERSION}
     # Mount internal folder to /notebooks folder in container, 1:1 copy
     volumes:
      - ./src/:/notebooks
@@ -23,10 +23,10 @@ services:
     command: start-notebook.sh --NotebookApp.notebook_dir=/notebooks
 
     # Specify container name
-    container_name: notebooks
+    container_name: ${NOTEBOOK_CONTAINER_NAME}
 
     # Mount external port to an interal port EXTERNAL:INTERNAL
     ports:
-      - "8888:8888"
+      - "${NOTEBOOK_CONTAINER_PORT}:8888"
 
 
