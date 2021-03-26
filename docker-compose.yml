@@ -6,10 +6,13 @@ services:
   # Specify notebook service
   notebook:
     # Select image to be used for container
-    image: zehnder/notebook:1.0
+    image: ${NOTEBOOK_CONTAINER_VERSION}
     # Mount internal folder to /notebooks folder in container, 1:1 copy
     volumes:
      - ./src/:/notebooks
+
+     # Map an internal drive/folder to the insides of the containmer
+     - ${HOST_DATA_OUTPUT_LOCATION}:/notebooks/output
     
     # Place specific OS variables here
     environment:
@@ -20,8 +23,10 @@ services:
     command: start-notebook.sh --NotebookApp.notebook_dir=/notebooks
 
     # Specify container name
-    container_name: lab
+    container_name: ${NOTEBOOK_CONTAINER_NAME}
 
     # Mount external port to an interal port EXTERNAL:INTERNAL
     ports:
-      - "8888:8888"
+      - "${NOTEBOOK_CONTAINER_PORT}:8888"
+
+
