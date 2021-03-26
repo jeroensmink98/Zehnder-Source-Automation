@@ -2,9 +2,13 @@
 The offical repo of the Zehnder Source Automation project
 
 ## How to run
-To run the local version of the development environment just build the docker container and start it
+1. Clone the project to the target machine
+2. Create a copy of the ``env.example`` file and name it ``.env``
+3. Configure the ``.env`` file to your needs
+4. Run ```docker-compose up`` to startup the environment
 
-To build the docker container run ``docker compose build`` after that run ``docker compose up`` Don't include the ``-d`` flag since we want our Notebook URL to be displayed in the terminal
 
 ## Adding libraries
 To add packages to the build include them in the ``requirements.txt``. After that you will need to rebuild the image with ``docker compose build``.
+
+Make sure you either push the new container to the Docker hub or include the local container in the ```docker-compose.yml`` file.
