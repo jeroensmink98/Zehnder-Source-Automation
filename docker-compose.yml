@@ -6,10 +6,15 @@ services:
   # Specify notebook service
   notebook:
     # Select image to be used for container
-    image: zehnder/notebook:1.0
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
     # Mount internal folder to /notebooks folder in container, 1:1 copy
     volumes:
      - ./src/:/notebooks
+
+     # Map an internal drive/folder to the insides of the containmer
+     - I:/output:/notebooks/output
     
     # Place specific OS variables here
     environment:
@@ -20,8 +25,10 @@ services:
     command: start-notebook.sh --NotebookApp.notebook_dir=/notebooks
 
     # Specify container name
-    container_name: lab
+    container_name: notebooks
 
     # Mount external port to an interal port EXTERNAL:INTERNAL
     ports:
       - "8888:8888"
+
+
