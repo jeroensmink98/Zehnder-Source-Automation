@@ -17,6 +17,8 @@ services:
     # Place specific OS variables here
     environment:
       - JUPYTER_ENABLE_LAB=yes
+      # you can go to localhost:PORT?token=value
+      - JUPYTER_TOKEN=${NOTEBOOK_TOKEN_VALUE}
     env_file:
       - .env
     # Run this command on container startup: Start notebook service
