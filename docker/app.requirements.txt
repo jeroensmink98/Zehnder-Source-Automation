@@ -1,0 +1,6 @@
+flask
+redis
+requests
+cbsodata
+openpyxl
+python-dotenv 

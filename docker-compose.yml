@@ -30,5 +30,24 @@ services:
     # Mount external port to an interal port EXTERNAL:INTERNAL
     ports:
       - "${NOTEBOOK_CONTAINER_PORT}:8888"
-
+  
+  # MAIN PYTHON APPLICATION
+  app:
+    container_name: "zsa_app"
+    # Specify Docker file
+    build:
+      context: ./docker
+      dockerfile: app.Dockerfile
+    # Expose port
+    ports:
+      - "5000:5000"
+    # Mount internal src/app directory to the inside of the container
+    volumes:
+     - ./src/app:/code
+    # Set environment to development so we can hot-reload
+    environment:
+      FLASK_ENV: development
+  redis:
+    container_name: "cache"
+    image: "redis:alpine"
 
