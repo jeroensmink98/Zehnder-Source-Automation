@@ -37,17 +37,17 @@ services:
     # Specify Docker file
     build:
       context: ./docker
-      dockerfile: app.Dockerfile
+      dockerfile: zsa.Dockerfile
     # Expose port
     ports:
       - "5000:5000"
     # Mount internal src/app directory to the inside of the container
     volumes:
-     - ./src/app:/code
+     - ./cli:/code
     # Set environment to development so we can hot-reload
     environment:
       FLASK_ENV: development
+
   redis:
-    container_name: ${REDIS_CONTAINER_NAME}
     image: "redis:alpine"
 
