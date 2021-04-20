@@ -52,8 +52,8 @@ class ExtensionService(SSE.ConnectorServicer):
         :return: Mapping of function id and implementation
         """
         return {
-            0: '_hello_world',
-            1: '_hello_world_aggr',
+            0: '_zsa',
+            1: '_zsa_aggr',
             2: '_cache',
             3: '_no_cache',
             4: '_echo_table'
@@ -77,7 +77,7 @@ class ExtensionService(SSE.ConnectorServicer):
     """
 
     @staticmethod
-    def _hello_world(request, context):
+    def _zsa(request, context):
         """
         Mirrors the input and sends back the same data.
         :param request: iterable sequence of bundled rows
@@ -87,7 +87,7 @@ class ExtensionService(SSE.ConnectorServicer):
             yield request_rows
 
     @staticmethod
-    def _hello_world_aggr(request, context):
+    def _zsa_aggr(request, context):
         """
         Aggregates the parameters to a single comma separated string.
         :param request: iterable sequence of bundled rows
