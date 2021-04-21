@@ -132,7 +132,7 @@ dmypy.json
 .idea
 
 # Ignore Log Files
-.log
+*.log
 
 # Remove output values
 /output*
@@ -143,3 +143,6 @@ dmypy.json
 
 # Ignore CSV files
 *.csv
+
+# log output of connector
+/logs*
