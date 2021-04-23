@@ -1,4 +1,4 @@
-# Zehnder Source Automation Connector
+# Zehnder Source Automation
 This is the official repo for the Zehnder Source Automation project lead by Sjoerd Kwakkel and executed by students from Hogeschool Windesheim in 2021.
 
 ## Authors
