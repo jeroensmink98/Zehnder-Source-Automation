@@ -13,7 +13,7 @@ Make sure you have the following programs installed on your machine
 
 ## Configure the environment
 ### Step 1
-In this repo you will find a file called ``zsa.txt`` import this file in Anaconda Navigator as a environment. Go to the environments tab in Anaconda Navigator and in the bottom select <b>import</b> from here select the ``zsa.txt`` file and give the environment a name.
+In this repo you will find a file called ``zsa.txt`` import this file in Anaconda Navigator as a environment. Go to the environments tab in Anaconda Navigator and in the bottom select <b>import</b> from here select the ``environment.yml`` file and give the environment a name.
 
 The Python environment will be imported and all modules are already installed and ready to use. 
 
@@ -35,7 +35,7 @@ If you need to add new packages to the Anaconda Environment either trough the An
 1. Go to the environment tab in Anaconda Navigator.
 2. Open your specific environment by pressing the arrow button and then choose terminal.
 3. Now just install your pip packages as normal
-4. When done installing the packages you can create an export of your environment by typing ``conda list -e > req.txt`` the ``req.txt`` file can then again be imported as a seperate environmetn or be added to version control when a package is updated etc..
+4. When done installing the packages you can create an export of your environment by typing ``conda env export > environment.yml --name zsa`` the ``environment.yml`` file can then again be imported as a seperate environment or be added to version control when a package is updated etc..
 
 ## Using the configuration file
 You can add new variables to the configuration file by using a key value pair. then in your python scripts you will only have to import the module that takes care of the ``ini`` file and you good to go!
