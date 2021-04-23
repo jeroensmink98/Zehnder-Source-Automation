@@ -1,23 +1,56 @@
-# Zehnder-Source-Automation
-The offical repo of the Zehnder Source Automation project
+# Zehnder Source Automation Connector
+This is the official repo for the Zehnder Source Automation project lead by Sjoerd Kwakkel and executed by students from Hogeschool Windesheim in 2021.
 
-## Build Container from scratch
-If you want to build the docker container from scratch you can find a ``.Dockerfile`` in the ``/docker`` folder. You can open the file with a text editor.
+## Authors
+- [Jeroen Smink](https://github.com/jeroensmink98)
+- Wolter van Donk
+- Diana Truta
+- Manar Baouane
 
-When you are done making changes build a new version of the image by going into the directory and run ``docker build . `` or when you want to upload it to a registery run ``docker build -t <USERNAME>/<REPO>:TAG .`` It will build a version that you can push to the registery.
+## Before running
+Make sure you have the following programs installed on your machine
+- [Anaconda Navigator](https://www.anaconda.com/products/individual)
 
-If you want to use your own image you just builded yourself edit the ``docker.compose.yml`` file. and change the value of ``image:`` into the name of your container.
+## Configure the environment
+### Step 1
+In this repo you will find a file called ``zsa.txt`` import this file in Anaconda Navigator as a environment. Go to the environments tab in Anaconda Navigator and in the bottom select <b>import</b> from here select the ``zsa.txt`` file and give the environment a name.
+
+The Python environment will be imported and all modules are already installed and ready to use. 
+
+### Step 2
+Next you will have to configure the ``config.ini`` file. Here you will have to select both the full path location of the ``run_all_scripts.bat`` file in the file system and specify an output path for the ``.csv`` files that will be exported when executing the scripts.
+
+Make sure the user who is runnig/executing the scripts has enough rights to write to the target location in the ``config.ini`` file. Otherwise the scripts will throw an exception.
 
 
-## How to run
-1. Clone the project to the target machine
-2. Create a copy of the ``env.example`` file and name it ``.env``
-3. Configure the ``.env`` file to your needs
-4. Run ``docker-compose up`` to startup the environment
-5. In the output of the console you can find a url that will lead to the notebook environment, including a cookie to login
+## Run the scripts
+Now there are two ways of running the scripts. Inside of Qlik Sense you can target the functionality called ``ZSAs.RunScripts`` This method will cause all python scripts to run inside of the ``scripts`` directory. 
+
+You can also manualy launch the scripts by running ``python run.py`` from the CLI of your Anaconda environment.
 
 
-## Adding libraries
-To add packages to the build include them in the ``requirements.txt``. After that you will need to rebuild the image with ``docker compose build``.
+## Adding packages to the environment
+If you need to add new packages to the Anaconda Environment either trough the Anaconda tool or trough Pip you can do it as following:
 
-Make sure you either push the new container to the Docker hub or include the local container in the ``docker-compose.yml`` file.
+1. Go to the environment tab in Anaconda Navigator.
+2. Open your specific environment by pressing the arrow button and then choose terminal.
+3. Now just install your pip packages as normal
+4. When done installing the packages you can create an export of your environment by typing ``conda list -e > req.txt`` the ``req.txt`` file can then again be imported as a seperate environmetn or be added to version control when a package is updated etc..
+
+## Using the configuration file
+You can add new variables to the configuration file by using a key value pair. then in your python scripts you will only have to import the module that takes care of the ``ini`` file and you good to go!
+
+```py
+from configparser import ConfigParser
+
+# Create instance of configParser
+config = ConfigParser()
+
+# Import ini file
+config.read("config.ini")
+
+my_var = config.get("main", "KEY")
+```
+
+
+
