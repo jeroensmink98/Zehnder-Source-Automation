@@ -13,7 +13,7 @@ Make sure you have the following programs installed on your machine
 
 ## Configure the environment
 ### Step 1
-In this repo you will find a file called ``zsa.txt`` import this file in Anaconda Navigator as a environment. Go to the environments tab in Anaconda Navigator and in the bottom select <b>import</b> from here select the ``environment.yml`` file and give the environment a name.
+In this repo you will find a file called ``environment.yml`` import this file in Anaconda Navigator as a environment. Go to the environments tab in Anaconda Navigator and in the bottom select <b>import</b> from here select the ``environment.yml`` file and give the environment a name.
 
 The Python environment will be imported and all modules are already installed and ready to use. 
 
