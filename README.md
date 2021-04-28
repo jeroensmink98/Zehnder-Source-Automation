@@ -36,7 +36,7 @@ If you need to add new packages to the Anaconda Environment either trough the An
 2. Open your specific environment by pressing the arrow button and then choose terminal.
 3. Now just install your pip packages as normal
 4. When done installing the packages you can create an export of your environment by typing ``conda env export > environment.yml --name zsa`` the ``environment.yml`` file can then again be imported as a seperate environment or be added to version control when a package is updated etc..
-5. WARNING: For some reason the outputted file ``environment.yml`` gets a UTF-16 encoding. This has to do with the fact we use ``>`` in the command. Therefore you have to open the file first in a text-editor and change the encoding to UTF-8 otherwise Anaconda will not import the file
+5. WARNING: For some reason the outputted file ``environment.yml`` gets a UTF-16 encoding. This has to do with the fact we use ``>`` in the command. Therefore you have to open the file first in a text-editor and change the encoding to UTF-8 otherwise Anaconda will not import the file. If you know how to fix this.. please let [Jeroen Smink](https://github.com/jeroensmink98) know or update the documentation.
 
 ## Using the configuration file
 You can add new variables to the configuration file by using a key value pair. then in your python scripts you will only have to import the module that takes care of the ``ini`` file and you good to go!
