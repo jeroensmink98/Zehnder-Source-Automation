@@ -1,0 +1,13 @@
+{
+  "Functions": [
+    {
+      "Id": 0,
+      "Name": "RunScripts",
+      "Type": 2,
+      "ReturnType": 0,
+      "Params": {
+        "str1": 0
+      }
+    }
+  ]
+}
