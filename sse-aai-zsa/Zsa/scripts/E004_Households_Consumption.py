@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
 
 # Import modules
 from logger import setup_custom_logger
@@ -13,28 +11,24 @@ import pandas as pd
 pd.options.mode.chained_assignment = None  # default='warn' (fasle chain warning when adjusting the main DF and not a copy regarding date)
 import cbsodata
 import datetime
-
-
-# In[ ]:
+from msg import *
 
 
 # Setup of logger
 try:
     logger = setup_custom_logger("E004_Households_Consumption")
-    logger.info("starting")
+    logger.info("---------------------------------------------------")
+    logger.info(txtStarting + " " + logger.name)
 except:
     logger.exception("logger could not be loaded")
     raise
-
-
-# In[ ]:
 
 
 try:
     # Get current date information
     now = datetime.datetime.now()
 
-    logger.info("datetime loaded")
+
     yearMin = now.year - 6
     currentYear = now.year - 1
 
@@ -53,9 +47,6 @@ except:
     raise
 
 
-# In[ ]:
-
-
 # Dataset 84106NED
 dataset_id = "84106NED"
 
@@ -66,9 +57,6 @@ dataset_id = "84106NED"
 # SoortMutaties: A045300 = Volume_tov_voorgaande_periode
 # SoortMutaties: A045301 = Waarde_tov_zelfe_periode_vorig_jaar
 # SoortMutaties: A045302 = Waarde_tov_voorgaande_periode
-
-
-# In[ ]:
 
 
 try:
@@ -83,9 +71,6 @@ try:
 except:
     logger.exception("error loading data from CBS Statline")
     raise
-
-
-# In[ ]:
 
 
 # Remove  yearly data
@@ -113,9 +98,6 @@ except:
     raise
 
 
-# In[ ]:
-
-
 try:
     df = df.groupby(["Perioden", "SoortMutaties"]).agg({"Huishoudens_10": ["sum"]})
     df = df.reset_index()
@@ -124,11 +106,9 @@ except:
     raise
 
 
-# In[ ]:
-
-
 try:
     file_writer(df, "E004_Households_Consumption")
+    logger.info(txtDone)
 except:
     logger.exception("Exporting failed")
     raise

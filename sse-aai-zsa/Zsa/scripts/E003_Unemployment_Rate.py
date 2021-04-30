@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
 
 # Import Modules
 from logger import setup_custom_logger
@@ -11,28 +9,24 @@ import pandas as pd
 import requests
 import cbsodata
 import datetime
-
-
-# In[ ]:
+from msg import *
 
 
 # Setup Logger
 try:
+
     logger = setup_custom_logger("E002_Unemployment_Rate")
-    logger.info("starting")
+    logger.info("---------------------------------------------------")
+    logger.info(txtStarting + " " + logger.name)
 except:
     logger.exception("logger could not be loaded")
     raise
-
-
-# In[ ]:
 
 
 try:
     # Get current date information
     now = datetime.datetime.now()
 
-    logger.info("datetime loaded")
     yearMin = now.year - 3
     yearMax = now.year
 
@@ -51,11 +45,8 @@ except:
     raise
 
 
-# In[ ]:
-
-
 # Dataset 80590ned
-dataset_id = "80590ned"
+dataset_id = "80590NED"
 
 # Table definitions
 
@@ -68,9 +59,6 @@ dataset_id = "80590ned"
 # Seizoengecorrigeerd_8 = Werkloosheidspeercentage_Seizoengecorrigeerd_procenten
 # Seizoengecorrigeerd_12 = Bruto_Arbeitsparticipatie_Seizoengecorrigeerd_procenten
 # Seizoengecorrigeerd_14 = Netto_Arbeitsparticipatie_Seizoengecorrigeerd_procenten
-
-
-# In[ ]:
 
 
 try:
@@ -97,9 +85,6 @@ except:
     raise
 
 
-# In[ ]:
-
-
 # Remove quaterly and yearly data
 try:
     data = data[data["Perioden"].str.contains("kwartaal") == False]
@@ -107,9 +92,6 @@ try:
 except:
     logger.exception("Perioden filter could not be applied")
     raise
-
-
-# In[ ]:
 
 
 # Date formatting and quarter format
@@ -120,9 +102,6 @@ try:
 except:
     logger.exception("Values could not get multiplied")
     raise
-
-
-# In[ ]:
 
 
 # Date formatting and quarter format
@@ -147,9 +126,6 @@ except:
     raise
 
 
-# In[ ]:
-
-
 # Rename columns
 try:
     data = data.rename(
@@ -168,11 +144,9 @@ except:
     raise
 
 
-# In[ ]:
-
-
 # Export dataFrame to Excel file
 try:
     file_writer(data, "E003_UnemploymentRate")
+    logger.info(txtDone)
 except:
     logger.exception("dataFrame could not be exported to output folder")

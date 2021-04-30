@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
 
 # Import Modules
 from logger import setup_custom_logger
@@ -11,28 +9,25 @@ import pandas as pd
 import requests
 import cbsodata
 import datetime
-
-
-# In[ ]:
+from msg import *
 
 
 # Setup Logger
 try:
+
     logger = setup_custom_logger("E005_Investments_Non_Current_Assets")
-    logger.info("starting")
+    logger.info("---------------------------------------------------")
+    logger.info(txtStarting + " " + logger.name)
 except:
     logger.exception("logger could not be loaded")
     raise
-
-
-# In[ ]:
 
 
 try:
     # Get current date information
     now = datetime.datetime.now()
 
-    logger.info("datetime loaded")
+ 
     yearMin = now.year - 3
     yearMax = now.year
 
@@ -49,9 +44,6 @@ except:
     yearMin = 2010
     yearMax = 2030
     raise
-
-
-# In[ ]:
 
 
 # Dataset 84106NED
@@ -71,9 +63,6 @@ dataset_id = "84106NED"
 # Overheid_14 = Overheid
 
 # We could skip totaal since we can calculate that on or own (process gegeven)
-
-
-# In[ ]:
 
 
 try:
@@ -96,9 +85,6 @@ except:
     raise
 
 
-# In[ ]:
-
-
 # Date formatting and quarter format
 try:
     df["Perioden"] = df["Perioden"].str.replace(" 1e kwartaal", "-03-01")
@@ -111,9 +97,6 @@ except:
         "Columns could not be changed to monthly numbers or formatted to different date"
     )
     raise
-
-
-# In[ ]:
 
 
 # removing total field and renaming
@@ -131,11 +114,9 @@ except:
     raise
 
 
-# In[ ]:
-
-
 # Export dataFrame to Excel file
 try:
     file_writer(df, "E005_Investments_Non_Current_Assets")
+    logger.info(txtDone)
 except:
     logger.exception("dataFrame could not be exported to output folder")

@@ -1,17 +1,21 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
 
 from logger import setup_custom_logger
 from file_writer import file_writer
 import sys
 import pandas as pd
 import cbsodata
+from msg import *
+
 
 logger = setup_custom_logger("B009_New_Building_Permits")
-logger.info("starting")
+logger.info("---------------------------------------------------")
+logger.info(txtStarting + " " + logger.name)
+
+dataset_id = "83671NED"
+logger.info(f"Retrieve data from dataset {dataset_id}")
 try:
     df = pd.DataFrame(
         cbsodata.get_data(
@@ -33,9 +37,6 @@ except:
     raise
 
 
-# In[ ]:
-
-
 try:
     df = df.groupby(["Perioden", "Opdrachtgever", "Eigendom"]).agg(
         {"Woningen_2": ["sum"], "Wooneenheden_3": sum, "Recreatiewoningen_4": sum}
@@ -44,9 +45,6 @@ try:
 except:
     logger.exception("Grouping data failed")
     raise
-
-
-# In[ ]:
 
 
 # Date formatting and quarter format
@@ -63,17 +61,9 @@ except:
     raise
 
 
-# In[ ]:
-
-
 try:
     file_writer(df, "B009_New_Building_Permits")
+    logger.info(txtDone)
 except:
     logger.exception("Exporting failed")
     raise
-
-
-# In[ ]:
-
-
-logger.info("Ended")

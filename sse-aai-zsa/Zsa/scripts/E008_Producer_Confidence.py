@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
 
 # Import Modules
 from logger import setup_custom_logger
@@ -11,15 +9,14 @@ import pandas as pd
 import requests
 import cbsodata
 import datetime
-
-
-# In[2]:
+from msg import *
 
 
 # Setup Logger
 try:
     logger = setup_custom_logger("E008_Producer_Confidence")
-    logger.info("starting")
+    logger.info("---------------------------------------------------")
+    logger.info(txtStarting + " " + logger.name)
 except:
     logger.exception("logger could not be loaded")
     raise
@@ -32,7 +29,6 @@ try:
     # Get current date information
     now = datetime.datetime.now()
 
-    logger.info("datetime loaded")
     yearMin = now.year - 3
     yearMax = now.year
 
@@ -51,11 +47,8 @@ except:
     raise
 
 
-# In[4]:
-
-
 # Dataset 81234ned
-dataset_id = "81234ned"
+dataset_id = "81234NED"
 # Table definitions
 
 # Geslacht: T001038 = Totaal (man/vrouw)
@@ -67,9 +60,6 @@ dataset_id = "81234ned"
 # Seizoengecorrigeerd_8 = Werkloosheidspeercentage_Seizoengecorrigeerd_procenten
 # Seizoengecorrigeerd_12 = Bruto_Arbeitsparticipatie_Seizoengecorrigeerd_procenten
 # Seizoengecorrigeerd_14 = Netto_Arbeitsparticipatie_Seizoengecorrigeerd_procenten
-
-
-# In[5]:
 
 
 try:
@@ -84,9 +74,6 @@ except:
     raise
 
 
-# In[6]:
-
-
 # Remove quaterly and yearly data
 try:
     data = data[data["Perioden"].str.contains("kwartaal") == False]
@@ -94,9 +81,6 @@ try:
 except:
     logger.exception("Perioden filter could not be applied")
     raise
-
-
-# In[7]:
 
 
 # Date formatting and quarter format
@@ -121,11 +105,9 @@ except:
     raise
 
 
-# In[8]:
-
-
 # Export dataFrame to Excel file
 try:
     file_writer(data, "E008_Producer_Confidence")
+    logger.info(txtDone)
 except:
     logger.exception("dataFrame could not be exported to output folder")

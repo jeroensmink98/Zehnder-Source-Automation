@@ -11,28 +11,23 @@ import sys
 import pandas as pd
 import cbsodata
 import datetime
-
-
-# In[ ]:
+from msg import *
 
 
 # Setup of logger
 try:
     logger = setup_custom_logger("B003_Permits_New_Houses")
-    logger.info("starting")
+    logger.info("---------------------------------------------------")
+    logger.info(txtStarting + " " + logger.name)
 except:
     logger.exception("logger could not be loaded")
     raise
-
-
-# In[ ]:
 
 
 try:
     # Get current date information
     now = datetime.datetime.now()
 
-    logger.info("datetime loaded")
     yearMin = now.year - 4
     yearMax = now.year
 
@@ -51,9 +46,6 @@ except:
     raise
 
 
-# In[ ]:
-
-
 # Dataset 83668NED
 dataset_id = "83668NED"
 
@@ -61,9 +53,6 @@ dataset_id = "83668NED"
 # Woningen_1 = Bouwvergunningen_woonruimten_Woningen
 # Wooneenheden_2 = Bouwvergunningen_woonruimten_Wooneenheden
 # Recreatiewoningen_3 = Bouwvergunningen_woonruimten_Recreatiewoningen
-
-
-# In[ ]:
 
 
 try:
@@ -80,9 +69,6 @@ except:
     raise
 
 
-# In[ ]:
-
-
 # Rename columns
 try:
     data = data.rename(
@@ -96,9 +82,6 @@ try:
 except:
     logger.exeption("Columns could not be renamed")
     raise
-
-
-# In[ ]:
 
 
 # Date formatting and quarter format
@@ -123,11 +106,9 @@ except:
     raise
 
 
-# In[ ]:
-
-
 # Export dataFrame to Excel file
 try:
     file_writer(data, "B003_Permits_New_Houses")
+    logger.info(txtDone)
 except:
     logger.exception("dataFrame could not be exported to output folder")
