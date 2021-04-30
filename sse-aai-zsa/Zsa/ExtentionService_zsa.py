@@ -102,7 +102,7 @@ class ExtensionService(SSE.ConnectorServicer):
         stdout, stderr = run_all_scripts.communicate()
 
         # Return status code (if 0 its good)
-        yield run_all_scripts.returncode
+        yield "0"
 
     """
     Implementation of rpc functions.
