@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
-
 
 # Import modules
 from logger import setup_custom_logger
@@ -11,28 +9,23 @@ import sys
 import pandas as pd
 import cbsodata
 import datetime
-
-
-# In[ ]:
+from msg import *
 
 
 # Setup of logger
 try:
     logger = setup_custom_logger("E001_BBP")
-    logger.info("starting")
+    logger.info("---------------------------------------------------")
+    logger.info(txtStarting + " " + logger.name)
 except:
     logger.exception("logger could not be loaded")
     raise
-
-
-# In[ ]:
 
 
 try:
     # Get current date information
     now = datetime.datetime.now()
 
-    logger.info("datetime loaded")
     yearMin = now.year - 4
     yearMax = now.year
 
@@ -51,9 +44,6 @@ except:
     raise
 
 
-# In[ ]:
-
-
 # Dataset 84106NED
 dataset_id = "84106NED"
 
@@ -61,9 +51,6 @@ dataset_id = "84106NED"
 
 # SoortMutaties: A045299 = Volume, t.o.v. zelfde periode vorig jaar
 # BrutoBinnenlandsProduct_2: waarde BBP
-
-
-# In[ ]:
 
 
 try:
@@ -80,9 +67,6 @@ except:
     raise
 
 
-# In[ ]:
-
-
 # Remove quaterly and yearly data
 try:
     data = data[data["Perioden"].str.contains("kwartaal") == True]
@@ -90,9 +74,6 @@ try:
 except:
     logger.exception("Perioden filter could not be applied")
     raise
-
-
-# In[ ]:
 
 
 # Rename columns
@@ -106,9 +87,6 @@ try:
 except:
     logger.exeption("Columns could not be renamed")
     raise
-
-
-# In[ ]:
 
 
 # Date formatting and quarter format
@@ -125,11 +103,9 @@ except:
     raise
 
 
-# In[ ]:
-
-
 # Export dataFrame to Excel file
 try:
     file_writer(data, "E001_BBP")
+    logger.info(txtDone)
 except:
     logger.exception("dataFrame could not be exported to output folder")

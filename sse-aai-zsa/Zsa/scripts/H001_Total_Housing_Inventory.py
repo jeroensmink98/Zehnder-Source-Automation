@@ -11,28 +11,24 @@ import sys
 import pandas as pd
 import cbsodata
 import datetime
-
-
-# In[2]:
+from msg import *
 
 
 # Setup of logger
 try:
     logger = setup_custom_logger("H001_Total_Housing_Inventory")
-    logger.info("starting")
+    logger.info("---------------------------------------------------")
+    logger.info(txtStarting + " " + logger.name)
+
 except:
     logger.exception("logger could not be loaded")
     raise
-
-
-# In[3]:
 
 
 try:
     # Get current date information
     now = datetime.datetime.now()
 
-    logger.info("datetime loaded")
     yearMin = now.year - 6
     currentYear = now.year - 1
 
@@ -49,9 +45,6 @@ except:
     yearMin = 2010
     yearMax = 2030
     raise
-
-
-# In[4]:
 
 
 # Dataset 82900NED
@@ -71,9 +64,6 @@ dataset_id = "82900NED"
 # EigendomOnbekend_6 = Eigendom onbekend
 
 
-# In[5]:
-
-
 try:
     logger.info(f"Retrieve data from dataset {dataset_id}")
     df = pd.DataFrame(
@@ -85,9 +75,6 @@ try:
 except:
     logger.exception("error loading data from CBS Statline")
     raise
-
-
-# In[6]:
 
 
 # removing total field and renaming
@@ -108,18 +95,12 @@ except:
     raise
 
 
-# In[7]:
-
-
 # Date formatting and quarter format
 try:
     df["Perioden"] = pd.to_datetime(df["Perioden"]).dt.date
 except:
     logger.exception("Columns could not be formatted to different date")
     raise
-
-
-# In[8]:
 
 
 # Removing totaal status van bewoning because procesdata
@@ -130,12 +111,8 @@ except:
     raise
 
 
-# In[9]:
-
-
-# Export dataFrame to Excel file
 try:
     file_writer(df, "H001_Total_Housing_Inventory")
-    logger.info("Date loading ended")
+    logger.info(txtDone)
 except:
     logger.exception("dataFrame could not be exported to output folder")

@@ -7,6 +7,7 @@ import os
 import sys
 import time
 import subprocess
+from logger import setup_custom_logger
 from concurrent import futures
 from datetime import datetime
 
@@ -52,7 +53,7 @@ class ExtensionService(SSE.ConnectorServicer):
             os.path.dirname(os.path.abspath(__file__)), "logger.config"
         )
         logging.config.fileConfig(log_file)
-        logging.inf("------------------------------------------------------------")
+        logging.info("------------------------------------------------------------")
         logging.info("Starting Zehnder Source Automation Connector")
         logging.info("Logging enabled")
 
