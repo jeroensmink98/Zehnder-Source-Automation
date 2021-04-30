@@ -52,6 +52,7 @@ class ExtensionService(SSE.ConnectorServicer):
             os.path.dirname(os.path.abspath(__file__)), "logger.config"
         )
         logging.config.fileConfig(log_file)
+        logging.inf("------------------------------------------------------------")
         logging.info("Starting Zehnder Source Automation Connector")
         logging.info("Logging enabled")
 
