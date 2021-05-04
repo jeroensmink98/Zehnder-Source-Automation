@@ -53,6 +53,17 @@ class ExtensionService(SSE.ConnectorServicer):
         self.ScriptEval = ScriptEval()
         os.makedirs("logs", exist_ok=True)
 
+        f = open("zehnder.txt", "r")
+        file_contents = f.read()
+
+        print("\n")
+        print(file_contents)
+        print("\n")
+        print("Zehnder Source Automation")
+        print(
+            "Created by students from Hogeschool Windesheim 2021 under the lead of Sjoerd Kwakkel."
+        )
+        print("\n")
         logger.info("------------------------------------------------------------")
         logger.info("Starting Zehnder Source Automation Connector")
         logger.info("Logging enabled")
