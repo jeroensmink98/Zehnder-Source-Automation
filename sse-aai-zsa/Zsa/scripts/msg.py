@@ -1,2 +1,2 @@
 txtStarting = "starting"
-txtDone = "Data exported to csv"
+txtDone = "Data exported to csv, script ended successfully"
