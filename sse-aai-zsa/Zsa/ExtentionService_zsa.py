@@ -59,7 +59,10 @@ class ExtensionService(SSE.ConnectorServicer):
         print("\n")
         print(file_contents)
         print("\n")
-        print("Zehnder Source Automation")
+        print("Zehnder Source Automation Connector")
+        print(
+            "This program is used as connection bridge between Qlik Sense and  python  to retrieve \nthe latest market data for the Marketdata Dashboard in Qlik Sense.\n"
+        )
         print(
             "Created by students from Hogeschool Windesheim 2021 under the lead of Sjoerd Kwakkel."
         )
