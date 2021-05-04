@@ -20,6 +20,9 @@ config = ConfigParser()
 config.read("config.ini")
 
 
+# Setup logger
+logger = setup_custom_logger("ExtentionService_zsa")
+
 # Set the filepath of the batscript
 filepath = config.get("main", "bat_path") + "/run_all_scripts.bat"
 
@@ -49,13 +52,10 @@ class ExtensionService(SSE.ConnectorServicer):
         self._function_definitions = funcdef_file
         self.ScriptEval = ScriptEval()
         os.makedirs("logs", exist_ok=True)
-        log_file = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "logger.config"
-        )
-        logging.config.fileConfig(log_file)
-        logging.info("------------------------------------------------------------")
-        logging.info("Starting Zehnder Source Automation Connector")
-        logging.info("Logging enabled")
+
+        logger.info("------------------------------------------------------------")
+        logger.info("Starting Zehnder Source Automation Connector")
+        logger.info("Logging enabled")
 
     @property
     def function_definitions(self):
@@ -104,7 +104,7 @@ class ExtensionService(SSE.ConnectorServicer):
         stdout, stderr = run_all_scripts.communicate()
 
         # Return status code (if 0 its good)
-        logging.info("All scripts completed")
+        logger.info("All scripts completed")
         yield "0"
 
     """
@@ -121,7 +121,7 @@ class ExtensionService(SSE.ConnectorServicer):
         :param context: the context, not used in this method.
         :return: the capabilities.
         """
-        logging.info("GetCapabilities")
+        logger.info("GetCapabilities")
         # Create an instance of the Capabilities grpc message
         # Enable(or disable) script evaluation
         # Set values for pluginIdentifier and pluginVersion
@@ -145,7 +145,7 @@ class ExtensionService(SSE.ConnectorServicer):
                 for param_name, param_type in sorted(definition["Params"].items()):
                     function.params.add(name=param_name, dataType=param_type)
 
-                logging.info(
+                logger.info(
                     "Adding to capabilities: {}({})".format(
                         function.name, [p.name for p in function.params]
                     )
@@ -164,7 +164,7 @@ class ExtensionService(SSE.ConnectorServicer):
         func_id = self._get_function_id(context)
 
         # Call corresponding function
-        logging.info("ExecuteFunction (functionId: {})".format(func_id))
+        logger.info("ExecuteFunction (functionId: {})".format(func_id))
 
         return getattr(self, self.functions[func_id])(request_iterator, context)
 
@@ -226,15 +226,11 @@ class ExtensionService(SSE.ConnectorServicer):
                 [(private_key, cert_chain)], root_cert, True
             )
             server.add_secure_port("[::]:{}".format(port), credentials)
-            logging.info(
-                "*** Running server in secure mode on port: {} ***".format(port)
-            )
+            logger.info("Running server in secure mode on port: {}".format(port))
         else:
             # Insecure connection
             server.add_insecure_port("[::]:{}".format(port))
-            logging.info(
-                "*** Running server in insecure mode on port: {} ***".format(port)
-            )
+            logger.info("Running server in insecure mode on port: {} ".format(port))
 
         # Start gRPC server
         server.start()
