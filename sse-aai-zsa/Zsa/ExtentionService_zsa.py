@@ -121,7 +121,9 @@ class ExtensionService(SSE.ConnectorServicer):
         logger.info("------------------------------------------------------------")
         logger.info("All scripts completed")
         logger.info("------------------------------------------------------------")
-        yield 0
+
+        for request_rows in request:
+            yield request_rows
 
     """
     Implementation of rpc functions.
