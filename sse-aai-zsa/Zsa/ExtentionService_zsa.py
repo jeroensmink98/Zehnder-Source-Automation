@@ -104,6 +104,7 @@ class ExtensionService(SSE.ConnectorServicer):
         stdout, stderr = run_all_scripts.communicate()
 
         # Return status code (if 0 its good)
+        logging.info("All scripts completed")
         yield "0"
 
     """
