@@ -12,15 +12,32 @@ Make sure you have the following programs installed on your machine
 - [Anaconda Navigator](https://www.anaconda.com/products/individual)
 
 ## Configure the environment
-### Step 1
+### Step 1 Setup
 In this repo you will find a file called ``environment.yml`` import this file in Anaconda Navigator as a environment. Go to the environments tab in Anaconda Navigator and in the bottom select <b>import</b> from here select the ``environment.yml`` file and give the environment a name.
 
 The Python environment will be imported and all modules are already installed and ready to use. 
 
-### Step 2
+### Step 2 Configure
 Next you will have to configure the ``config.ini`` file. Here you will have to select both the full path location of the ``run_all_scripts.bat`` file in the file system and specify an output path for the ``.csv`` files that will be exported when executing the scripts.
 
 Make sure the user who is runnig/executing the scripts has enough rights to write to the target location in the ``config.ini`` file. Otherwise the scripts will throw an exception.
+
+### Step 3 Run the server
+If you want to create a connection between Qlik and the Python scripts you will have to execute the python file called ``ExtentionService_zsa.py`` This file will start a webserver that allows you to create a connection to Qlik Sense. Now in the Qlik DataLoader or basicly everywhere you can call the webserver.
+
+Call the webserver from Qlik 
+
+```sql
+ZSA_TABLE:
+  LOAD * INLINE [
+  ZSA
+  "zsa"
+];
+ 
+LOAD Field1 AS ZSA_TABLE EXTENSION ZSAs.RunScripts(ZSA_TABLE);
+```
+
+Because of a limitation of QLik Sense we have to give a table with data as parameter for function
 
 
 ## Run the scripts
