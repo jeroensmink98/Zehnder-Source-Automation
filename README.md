@@ -25,6 +25,8 @@ Make sure the user who is runnig/executing the scripts has enough rights to writ
 ### Step 3 Run the server
 If you want to create a connection between Qlik and the Python scripts you will have to execute the python file called ``ExtentionService_zsa.py`` This file will start a webserver that allows you to create a connection to Qlik Sense. Now in the Qlik DataLoader or basicly everywhere you can call the webserver.
 
+Make sure you call the python file from within the virtual environment you just imported in Anaconda. You can enter the terminal of a specific anaconda environment by running ``conda activate <ENV NAME>`` This cannot be run trough Powershell. You will have to run it in a regular command prompt
+
 Call the webserver from Qlik 
 
 ```sql
