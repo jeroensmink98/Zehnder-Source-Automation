@@ -145,5 +145,4 @@ dmypy.json
 *.csv
 
 # log output of connector
-/logs*
 sse-aai-zsa/Zsa
